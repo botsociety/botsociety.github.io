@@ -1,0 +1,151 @@
+
+<!doctype html>
+<!--
+  Botsociety API documentation
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Botsociety API documentation</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Botsociety API documentation">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.teal-red.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    #view-source {
+      position: fixed;
+      display: block;
+      right: 0;
+      bottom: 0;
+      margin-right: 40px;
+      margin-bottom: 40px;
+      z-index: 900;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="demo-layout mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+      <header class="demo-header mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title"><h1>Botsociety API documentation</h1></span>
+          <div class="mdl-layout-spacer"></div>
+          <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+              <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+              <input class="mdl-textfield__input" type="text" id="search">
+              <label class="mdl-textfield__label" for="search">Enter your query...</label>
+            </div>
+          </div> -->
+        </div>
+      </header>
+      <div class="demo-ribbon"></div>
+      <main class="demo-main mdl-layout__content">
+        <div class="demo-container mdl-grid">
+          <div class="mdl-cell mdl-cell--2-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
+          <div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--8-col">
+            <!-- <div class="demo-crumbs mdl-color-text--grey-500">
+              Google &gt; Botsociety API documentation &gt; How to install MDL
+            </div> -->
+            <p>
+              This document is intended to be an overall guide to the usage of the Botsociety API. A detailed documentation of every endpoint is maintained at <a href="https://botsociety.docs.apiary.io/#">Botsociety Apiary Docs</a>, although it may change in the future.
+            </p>
+            <h2>Overview</h2>
+              <p>
+                Your <a href="https://botsociety.io/chatbot">chatbot</a> or voice assistant stack can be summarized as follows:
+              </p>
+              <p>
+                <img src="overall_structure.png" />
+              </p>
+              <p>
+                <strong>The Botsociety API</strong> allows your business logic to access your mockup content. More on that later.
+              </p>
+              <p>
+                <strong>Business logic</strong> This block represents your codebase, eventual custom API, and database integrations. Part of the dialog management.
+              </p>
+              <p>
+                <strong>NLP</strong> This block represents your Natural Language Processing engine. Usually, these engines are either offered as a SaaS (like <a href="https://wit.ai" nofollow>wit.ai</a> or <a href="https://dialogflow.com/">Dialogflow</a>) or as an open source framework like <a href="https://rasa.com/">Rasa.ai</a>.
+              </p>
+              <p>
+                <strong>Platforms</strong> This block represents the platform(s) that your chatbot is deployed on. This block includes also the client side of your custom website or mobile application if you happen to use them. 
+              </p>
+              <p>
+                The ideal flow can be summarized as follows:
+                <ul>
+                  <li>The user writes a request on a platform</li>
+                  <li>The user request is received by your codebase</li>
+                  <li>If necessary, the request is piped through the Natural Language Processing engine for intent extraction</li>
+                  <li>Once the intent is identified, your codebase will identify the correct response for the user. In your codebase, such message can be identified by a numeric, progressive ID</li>
+                  <li>Your codebase calls the Botsociety API and retrieves the content of the message, by ID</li>
+                  <li>If variables are needed - example, a data extracted from your database or custom API - your custom codebase can simply replace those</li>
+                  <li>The codebase calls the platform and delivers the message</li>
+                </ul>
+                The flow above should be as quick as possible not to leave the user hanging. The Botsociety API is structured so that you can retrieve the content of the message on runtime without impacting on the overall performance of your chatbot or voice assistant.
+              </p>
+              <p>
+                This structure has different advantages:
+                <ul>
+                  <li>Total flexibility and control over your codebase. You don't need to pipe your production data through a third party SaaS if you don't want to</li>
+                  <li>Separation between code and content. You can change the content of your message, anytime, without having to redeploy your code</li>
+                  <li>Separation between content and NLP. By having your content on Botsociety, you can change your Natural Language Processing engine without having to re-input the content of your bot.</li>
+                  <li>You can turn your designs into complete bots very quickly</li>
+                </ul>
+              </p>
+              <p>
+                Note that this is course a standard, basic architecture. It is also possible not to use your custom codebase, and rely completely on a third party Software As a Service. For example, Dialogflow allows you to both integrate with multiple platforms and to manage dialog structure, as well as the Natural Language Processing. You can easily import your Botsociety design into Dialogflow once your design phase is concluded.
+              </p>
+          </div>
+        </div>
+        <footer class="demo-footer mdl-mini-footer">
+          <div class="mdl-mini-footer--left-section">
+            <ul class="mdl-mini-footer--link-list">
+              <li><a href="https://github.com/botsociety/node-client/blob/master/LICENSE">NPM package License</a></li>
+              <li><a href="https://github.com/botsociety/node-client/blob/master/README.md">NPM Package readme</a></li>
+            </ul>
+          </div>
+        </footer>
+      </main>
+    </div>
+    <a href="https://github.com/botsociety/botsociety.github.io" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast" nofollow>View Source</a>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  </body>
+</html>
